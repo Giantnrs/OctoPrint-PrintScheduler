@@ -1,3 +1,4 @@
+#tab_plugin_printscheduler div.filelist div.span6.file_path,
 #tab_plugin_printscheduler div.filelist div.span7.file_path {
     white-space: nowrap;
     overflow: hidden;
@@ -27,4 +28,19 @@
 
 #settings_plugin_printscheduler input.checkbox {
     margin-top: 0;
+}
+
+/* Styles for the repeat daily checkbox in the job list */
+#tab_plugin_printscheduler div.filelist .span2 .controls {
+    text-align: center;
+    margin-top: 5px;
+}
+
+#tab_plugin_printscheduler div.filelist .span2 .controls label.checkbox {
+    margin: 0;
+    display: inline-block;
+}
+
+#tab_plugin_printscheduler div.filelist .span2 .controls input[type="checkbox"] {
+    margin: 0 5px 0 0;
 }

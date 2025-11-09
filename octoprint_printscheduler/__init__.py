@@ -45,8 +45,13 @@ class PrintschedulerPlugin(octoprint.plugin.SettingsPlugin,
                     self._logger.debug("Bypassing scheduled job as printer is not available yet.")
                     return
                 self.job_active = True
-                if self._settings.get_boolean(["repeat_daily"]):
-                    new_job = job
+                # Check if this individual job should repeat daily (per-job setting)
+                job_repeat_daily = job.get("repeat_daily", False)
+                # Also check the global repeat_daily setting for backwards compatibility
+                global_repeat_daily = self._settings.get_boolean(["repeat_daily"])
+
+                if job_repeat_daily or global_repeat_daily:
+                    new_job = job.copy()
                     new_job["start_at"] = (datetime.fromisoformat(job["start_at"]) + timedelta(days=1)).isoformat(sep=" ", timespec="minutes")
                     self._logger.debug("Rescheduling job for next day: {}".format(new_job))
                     scheduled_jobs.append(new_job)

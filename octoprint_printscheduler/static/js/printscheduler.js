@@ -29,9 +29,14 @@ $(function() {
 		    self.start_at_changed_for.push(data.name() + '-' + data.start_at());
         };
 
+		self.repeat_daily_changed = function(data){
+		    self.needs_saving(true);
+		    console.log('Repeat daily changed for:', data.name(), 'to:', data.repeat_daily());
+        };
+
 		self.filesViewModel.addToScheduledJobs = function(data) {
 		    self.needs_saving(true);
-			self.settingsViewModel.settings.plugins.printscheduler.scheduled_jobs.push({name: ko.observable(data["name"]), path: ko.observable(data["path"]), start_at: ko.observable("")});
+			self.settingsViewModel.settings.plugins.printscheduler.scheduled_jobs.push({name: ko.observable(data["name"]), path: ko.observable(data["path"]), start_at: ko.observable(""), repeat_daily: ko.observable(false)});
             if(window.location.href.indexOf('#tab_plugin_printscheduler') < 0) {
                 $('#tab_plugin_printscheduler_link > a').tab('show');
             }
